@@ -1,13 +1,20 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 from . import views
 
+handler404 = views.custom_404
+handler500 = views.custom_500
+
+
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('lettings/', views.lettings_index, name='lettings_index'),
-    path('lettings/<int:letting_id>/', views.letting, name='letting'),
-    path('profiles/', views.profiles_index, name='profiles_index'),
-    path('profiles/<str:username>/', views.profile, name='profile'),
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
+    path("", views.index, name="index"),
+    path("lettings/", include("lettings.urls")),
+    path("profiles/", include("profiles.urls")),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
