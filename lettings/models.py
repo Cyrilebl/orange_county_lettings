@@ -1,7 +1,3 @@
-"""
-Defines the database models for addresses and lettings.
-"""
-
 from django.db import models
 from django.core.validators import MaxValueValidator, MinLengthValidator
 
@@ -9,6 +5,14 @@ from django.core.validators import MaxValueValidator, MinLengthValidator
 class Address(models.Model):
     """
     Represents an address associated with a letting.
+
+    Attributes:
+        number (PositiveIntegerField): The street number (up to 99999).
+        street (CharField): The name of the street.
+        city (CharField): The city in which the address is located.
+        state (CharField): The state consisting of 2 characters.
+        zip_code (PositiveIntegerField): The postal code (up to 99999).
+        country_iso_code (CharField): The iso code for the country (3 characters).
 
     Methods:
         __str__: Returns a string representation of the address.
@@ -33,6 +37,10 @@ class Address(models.Model):
 class Letting(models.Model):
     """
     Represents a rental letting linked to an address.
+
+    Attributes:
+        title (CharField): The title of the rental letting (up to 256 characters).
+        address (OneToOneField): A one-to-one relationship with the Address model.
 
     Methods:
         __str__: Returns the title of the letting.

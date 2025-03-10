@@ -1,15 +1,14 @@
-"""
-Defines the database model for profiles.
-"""
-
 from django.db import models
 from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
     """
-    This model represents a user profile, extending the default User model
-    with additional information such as the user's favorite city.
+    Represents a user profile with an additional field for the user's favorite city.
+
+    Attributes:
+        user (OneToOneField): The user associated with the profile.
+        favorite_city (CharField): The user's favorite city (optional, up to 64 characters).
 
     Methods:
         __str__: Returns the username of the associated User.
