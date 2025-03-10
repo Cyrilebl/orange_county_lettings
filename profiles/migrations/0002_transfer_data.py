@@ -4,7 +4,7 @@ from django.db import migrations
 
 
 def transfer_data(apps, schema_editor):
-    OldProfile = apps.get_model("oc_lettings_site", "Profile")
+    OldProfile = apps.get_model("profiles", "Profile")
     NewProfile = apps.get_model("profiles", "Profile")
 
     for old_instance in OldProfile.objects.all():

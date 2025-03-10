@@ -4,10 +4,10 @@ from django.db import migrations
 
 
 def transfer_data(apps, schema_editor):
-    OldAddress = apps.get_model("oc_lettings_site", "Address")
+    OldAddress = apps.get_model("lettings", "Address")
     NewAddress = apps.get_model("lettings", "Address")
 
-    OldLetting = apps.get_model("oc_lettings_site", "Letting")
+    OldLetting = apps.get_model("lettings", "Letting")
     NewLetting = apps.get_model("lettings", "Letting")
 
     for old_instance in OldAddress.objects.all():
