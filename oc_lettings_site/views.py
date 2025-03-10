@@ -4,6 +4,7 @@ This module defines the main views, including:
 - Custom error handlers for 404 and 500 errors.
 """
 
+import sentry_sdk
 from django.shortcuts import render
 
 
@@ -44,4 +45,5 @@ def custom_500(request):
     Returns:
         HttpResponse: The rendered 500.html template with a 500 status code.
     """
+    sentry_sdk.capture_exception()
     return render(request, "500.html", status=500)

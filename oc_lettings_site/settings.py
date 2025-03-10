@@ -1,6 +1,14 @@
 import os
+import sentry_sdk
 
+from sentry_sdk.integrations.django import DjangoIntegration
+from dotenv import load_dotenv
 from pathlib import Path
+
+
+load_dotenv()
+SECRET_KEY = os.getenv("SECRET_KEY")
+SENTRY_DSN = os.getenv("SENTRY_DSN")
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s"
+SECRET_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -116,3 +124,9 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+sentry_sdk.init(
+    dsn=SENTRY_DSN,
+    send_default_pii=True,
+    integrations=[DjangoIntegration()],
+)
