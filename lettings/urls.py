@@ -1,3 +1,8 @@
+"""
+This module defines URL patterns for the Lettings application,
+mapping views to specific endpoints.
+"""
+
 from django.urls import path
 
 from . import views
